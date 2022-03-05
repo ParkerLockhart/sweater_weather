@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Location do
-  let!(:data) {[{lat: '38.892062', lng: '-77.019912'}, 'Washington,DC']}
+  let!(:data) {['Washington,DC', {lat: '38.892062', lng: '-77.019912'}]}
   let!(:location) {Location.new(data)}
 
   it 'exists' do
