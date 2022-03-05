@@ -1,0 +1,23 @@
+{
+    "dt": 1646506800,
+    "temp": 59.67,
+    "feels_like": 57.63,
+    "pressure": 1026,
+    "humidity": 49,
+    "dew_point": 40.5,
+    "uvi": 3.36,
+    "clouds": 40,
+    "visibility": 10000,
+    "wind_speed": 8.93,
+    "wind_deg": 175,
+    "wind_gust": 13.87,
+    "weather": [
+        {
+            "id": 802,
+            "main": "Clouds",
+            "description": "scattered clouds",
+            "icon": "03d"
+        }
+    ],
+    "pop": 0
+}
