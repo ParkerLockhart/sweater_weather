@@ -1,0 +1,25 @@
+{
+    "current": {
+        "dt": 1646507067,
+        "sunrise": 1646480090,
+        "sunset": 1646521476,
+        "temp": 59.67,
+        "feels_like": 57.63,
+        "pressure": 1026,
+        "humidity": 49,
+        "dew_point": 40.5,
+        "uvi": 3.36,
+        "clouds": 40,
+        "visibility": 10000,
+        "wind_speed": 11.5,
+        "wind_deg": 190,
+        "weather": [
+            {
+                "id": 802,
+                "main": "Clouds",
+                "description": "scattered clouds",
+                "icon": "03d"
+            }
+        ]
+    }
+}
