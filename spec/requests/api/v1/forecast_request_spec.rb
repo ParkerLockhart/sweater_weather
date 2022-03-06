@@ -68,6 +68,12 @@ RSpec.describe 'Forecast Endpoint' do
 
       expect(current).to have_key(:icon)
       expect(current[:icon]).to be_a(String)
+
+      expect(current).to_not have_key(:pressure)
+      expect(current).to_not have_key(:dew_point)
+      expect(current).to_not have_key(:clouds)
+      expect(current).to_not have_key(:wind_speed)
+      expect(current).to_not have_key(:wind_deg)
     end
 
     it 'has daily weather info' do
@@ -98,6 +104,14 @@ RSpec.describe 'Forecast Endpoint' do
 
       expect(day).to have_key(:icon)
       expect(day[:icon]).to be_a(String)
+
+      expect(day).to_not have_key(:moonrise)
+      expect(day).to_not have_key(:moonset)
+      expect(day).to_not have_key(:moon_phase)
+      expect(day).to_not have_key(:pressure)
+      expect(day).to_not have_key(:dew_point)
+      expect(day).to_not have_key(:wind_speed)
+      expect(day).to_not have_key(:wind_deg)
     end
 
     it 'has hourly weather info' do
@@ -119,7 +133,19 @@ RSpec.describe 'Forecast Endpoint' do
 
       expect(hour).to have_key(:icon)
       expect(hour[:icon]).to be_a(String)
-    end 
+
+      expect(hour).to_not have_key(:pressure)
+      expect(hour).to_not have_key(:dew_point)
+      expect(hour).to_not have_key(:clouds)
+      expect(hour).to_not have_key(:wind_speed)
+      expect(hour).to_not have_key(:wind_deg)
+      expect(hour).to_not have_key(:wind_gust)
+    end
+
+    it 'does not have minutely info' do
+      expect(forecast).to_not have_key(:minutely)
+      expect(forecast).to_not have_key(:alerts)
+    end
   end
 
 end
