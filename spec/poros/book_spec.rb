@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Book do
-  let!(:data) { title: "book title", isbn: ["isbn"], publisher: ["publisher"], author_name: ["John Doe"] }
+  let!(:data) { {title: "book title", isbn: ["isbn"], publisher: ["publisher"], author_name: ["John Doe"]} }
   let!(:book) { Book.new(data) }
 
   it 'exists' do
@@ -14,4 +14,4 @@ RSpec.describe Book do
     expect(book.publisher).to eq("publisher")
     expect(book.author).to eq("John Doe")
   end
-end 
+end
