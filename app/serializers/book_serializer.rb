@@ -5,7 +5,7 @@ class BookSerializer
       "id": "null",
       "type": "books",
       "attributes": {
-        "destination:" location,
+        "destination": location.city,
         "forecast": {
           "summary": weather.conditions,
           "temperature": "#{weather.temp} F"
