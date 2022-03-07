@@ -34,7 +34,9 @@ RSpec.describe 'User Registration Endpoint' do
 
       expect(user[:data][:attributes]).to have_key(:api_key)
       expect(user[:data][:attributes][:api_key]).to be_a(String)
+    end
 
+    it 'does not return sensitive user data' do
       expect(user[:data][:attributes]).to_not have_key(:password)
       expect(user[:data][:attributes]).to_not have_key(:password_confirmation)
       expect(user[:data][:attributes]).to_not have_key(:password_digest)
@@ -46,7 +48,7 @@ RSpec.describe 'User Registration Endpoint' do
       error = JSON.parse(response.body, symbolize_names: true)
 
       expect(response.status).to eq(422)
-      expect(error[:error]).to eq("passwords don't match.")
+      expect(error[:error]).to eq("Passwords don't match.")
     end
 
     it 'returns error message for missing field' do

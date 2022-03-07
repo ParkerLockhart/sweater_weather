@@ -6,7 +6,7 @@ class Api::V1::UsersController < ApplicationController
       show
     elsif (params[:password] != params[:password_confirmation])
       render json: {
-        error: "passwords don't match.",
+        error: "Passwords don't match.",
       },
       status: :unprocessable_entity
     else
