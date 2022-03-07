@@ -3,8 +3,8 @@ class Book
 
   def initialize(data)
     @title = data[:title]
-    @author = data[:author_name].first
-    @publisher = data[:publisher].first
-    @isbn = data[:isbn] ? data[:isbn].first : nil
+    @author = data[:author_name]
+    @publisher = data[:publisher]
+    @isbn = data[:isbn] ? data[:isbn] : nil
   end
 end
