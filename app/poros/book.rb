@@ -5,6 +5,6 @@ class Book
     @title = data[:title]
     @author = data[:author_name].first
     @publisher = data[:publisher].first
-    @isbn = data[:isbn].first
+    @isbn = data[:isbn] ? data[:isbn].first : nil
   end
 end
