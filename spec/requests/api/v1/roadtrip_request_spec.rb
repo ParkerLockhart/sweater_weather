@@ -7,8 +7,8 @@ RSpec.describe 'Roadtrip Endpoint' do
       VCR.insert_cassette('denver_weather')
       user_params = { email: "jeff@email.com", password: "password123", password_confirmation: "password123" }
       post '/api/v1/users', params: user_params
-      user = JSON.parse(response.body, symbolize_names: true)
-      roadtrip_params = { origin: 'San Antonio, TX', destination: 'Denver, CO', api_key: user[:data][:attributes][:api_key] }
+      @user = JSON.parse(response.body, symbolize_names: true)
+      roadtrip_params = { origin: 'San Antonio, TX', destination: 'Denver, CO', api_key: @user[:data][:attributes][:api_key] }
       get '/api/v1/roadtrip', params: roadtrip_params
     end
 
@@ -63,6 +63,43 @@ RSpec.describe 'Roadtrip Endpoint' do
       get '/api/v1/roadtrip', params: unauthorized_params
 
       expect(response.status).to eq(401)
-    end 
+    end
+
+    it 'returns impossible route for bad route' do
+      VCR.use_cassette('impossible_route') do
+        VCR.use_cassette('impossible_weather') do
+          roadtrip_params = { origin: 'New York, NY', destination: 'London, UK', api_key: @user[:data][:attributes][:api_key] }
+          get '/api/v1/roadtrip', params: roadtrip_params
+          impossible = JSON.parse(response.body, symbolize_names: true)
+
+          expect(response).to be_successful
+
+          expect(impossible).to be_a(Hash)
+          expect(impossible).to have_key(:data)
+          expect(impossible[:data]).to be_a(Hash)
+
+          expect(impossible[:data]).to have_key(:id)
+          expect(impossible[:data][:id]).to eq(nil)
+
+          expect(impossible[:data]).to have_key(:type)
+          expect(impossible[:data][:type]).to eq("roadtrip")
+
+          expect(impossible[:data]).to have_key(:attributes)
+          expect(impossible[:data][:attributes]).to be_a(Hash)
+
+          expect(impossible[:data][:attributes]).to have_key(:start_city)
+          expect(impossible[:data][:attributes][:start_city]).to be_a(String)
+
+          expect(impossible[:data][:attributes]).to have_key(:end_city)
+          expect(impossible[:data][:attributes][:end_city]).to be_a(String)
+
+          expect(impossible[:data][:attributes]).to have_key(:travel_time)
+          expect(impossible[:data][:attributes][:travel_time]).to eq("Impossible route")
+
+          expect(impossible[:data][:attributes]).to have_key(:weather_at_eta)
+          expect(impossible[:data][:attributes][:weather_at_eta]).to eq(nil)
+        end
+      end
+    end
   end
 end
