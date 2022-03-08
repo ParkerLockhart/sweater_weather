@@ -1,18 +1,44 @@
 class RoadtripFacade
 
-  def self.roadtrip(origin, destination)
-    trip = LocationService.roadtrip(origin, destination)
-    time = trip[:route][:time]
-    time_offset = (time / 3600).to_i
-    dest_lat = trip[:route][:locations].last[:latLng][:lat]
-    dest_lng = trip[:route][:locations].last[:latLng][:lat]
-    weather = WeatherService.one_call(dest_lat, dest_lng)[:hourly][time_offset]
-
-    Roadtrip.new({
-                  start_city: origin,
-                  end_city: destination,
-                  travel_time: "#{(time / 3600).to_i} hrs, #{((time % 3600)/60).to_i } mins",
-                  weather: weather
-                  })
+  def self.roadtrip(from, to)
+    route = route_info(from, to)
+    Roadtrip.new({ start_city: from, end_city: to, travel_time: travel_time(route[:time]), weather: weather_at_eta(route) })
   end
+
+  def self.route_info(from, to)
+    route = LocationService.roadtrip(from, to)[:route]
+    if route[:time]
+      time = route[:time]
+      dest_lat = route[:locations].last[:latLng][:lat]
+      dest_lng = route[:locations].last[:latLng][:lng]
+      { time: time, lat: dest_lat, lng: dest_lng }
+    else
+      { time: "Impossible route" }
+    end
+  end
+
+  def self.time_offset(seconds)
+    (seconds / 3600).to_i
+  end
+
+  def self.time_format(seconds)
+    "#{(seconds / 3600).to_i}hrs, #{((seconds % 3600)/60).to_i }mins"
+  end
+
+  def self.weather_at_eta(route)
+    if route[:time].class == Integer
+      weather = WeatherService.one_call(route[:lat], route[:lng])[:hourly][time_offset(route[:time])]
+    else
+      nil
+    end
+  end
+
+  def self.travel_time(time)
+    if time.class == Integer
+      time_format(time)
+    else
+      time
+    end
+  end
+
 end
