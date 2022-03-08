@@ -4,7 +4,7 @@ RSpec.describe Roadtrip do
   let!(:start_city) {'san antonio, tx'}
   let!(:end_city) {'denver, co'}
   let!(:travel_time) {'14hrs, 21mins'}
-  let!(:weather) { { temp: 59.4, weather: [{ description: 'scattered showers'}] } }
+  let!(:weather) { { temperature: 59.4, conditions: 'scattered showers'} }
   let!(:data) { {start_city: start_city, end_city: end_city, travel_time: travel_time, weather: weather} }
   let!(:roadtrip) {Roadtrip.new(data)}
 
