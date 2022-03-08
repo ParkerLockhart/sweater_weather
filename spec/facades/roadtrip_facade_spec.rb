@@ -66,13 +66,10 @@ RSpec.describe RoadtripFacade do
           weather = RoadtripFacade.weather_at_eta(route)
 
           expect(weather).to be_a(Hash)
-          expect(weather).to have_key(:temp)
-          expect(weather[:temp]).to be_a(Float)
-          expect(weather).to have_key(:weather)
-          expect(weather[:weather]).to be_an(Array)
-          expect(weather[:weather].first).to be_a(Hash)
-          expect(weather[:weather].first).to have_key(:description)
-          expect(weather[:weather].first[:description]).to be_a(String)
+          expect(weather).to have_key(:temperature)
+          expect(weather[:temperature]).to be_a(Float)
+          expect(weather).to have_key(:conditions)
+          expect(weather[:conditions]).to be_a(String)
         end
       end
     end
