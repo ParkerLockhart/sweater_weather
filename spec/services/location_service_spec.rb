@@ -40,5 +40,27 @@ RSpec.describe LocationService do
         expect(location[:results].first[:locations].first[:latLng][:lng]).to be_a(Float)
       end
     end
+
+    describe 'roadtrip' do
+      before(:each) do
+        VCR.insert_cassette('roadtrip')
+      end
+      after(:each) do
+        VCR.eject_cassette('roadtrip')
+      end
+
+      let!(:roadtrip) { LocationService.roadtrip("San Antonio, TX", "Denver, CO") }
+
+      it 'returns response hash' do
+        expect(roadtrip).to be_a(Hash)
+      end
+
+      it 'response hash has time info' do
+        expect(roadtrip).to have_key(:route)
+        expect(roadtrip[:route]).to be_a(Hash)
+        expect(roadtrip[:route]).to have_key(:time)
+        expect(roadtrip[:route][:time]).to be_an(Integer)
+      end
+    end
   end
 end
