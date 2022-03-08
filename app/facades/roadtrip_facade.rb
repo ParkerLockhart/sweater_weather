@@ -27,7 +27,8 @@ class RoadtripFacade
 
   def self.weather_at_eta(route)
     if route[:time].class == Integer
-      weather = WeatherService.one_call(route[:lat], route[:lng])[:hourly][time_offset(route[:time])]
+      hourly = WeatherService.one_call(route[:lat], route[:lng])[:hourly][time_offset(route[:time])]
+      weather = { temperature: hourly[:temp], conditions: hourly[:weather].first[:description] }
     else
       nil
     end
