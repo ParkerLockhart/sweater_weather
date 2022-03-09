@@ -17,9 +17,12 @@ Skip to section:
 <details>
   <summary> Endpoints </summary>
   
-  - [GET forecast](#forecast)
-  - [GET background](#background-image)
-  - [POST users](#user-registration)
+  - [Forecast](#forecast)
+  - [Background image](#background-image)
+  - [User registration](#user-registration)
+  - [User login](#user-login)
+  - [Roadtrip](#roadtrip)
+  
 </details>
 
 
@@ -297,6 +300,7 @@ Example response:
 </details>
 <details>
   <summary> 422 Unprocessable Entity </summary>
+  
   ```
     {
     "error": "Passwords don't match."
@@ -309,6 +313,141 @@ or
   }
 ```
 </details>
+
+### User Login
+
+POST http://localhost:3000/api/v1/sessions
+
+Logs in a user with their email and password. 
+
+Body parameters:
+ | param | data type | value | required/optional |
+ |---|---|---|---|
+ | email | string | registered user email | REQUIRED |
+ | password | string | registered user password | REQUIRED |
+
+<details>
+  <summary>Example request body</summary> :
+  
+  ```
+  {
+    "email": "jessica@email.com",
+    "password": "password123"
+  }
+  ```
+</details>
+
+Example response: 
+
+
+<details>
+  <summary> 200 OK </summary>
+
+  ```
+  {
+    "data": {
+        "id": "3",
+        "type": "user",
+        "attributes": {
+            "email": "jessica@email.com",
+            "api_key": "XGmPkpPzXo53x2qCMVMRwqAtH"
+        }
+    }
+}
+```
+</details>
+
+<details>
+  <summary> 401 Unauthorized </summary>
+  
+  ```
+  {
+    "error": "Invalid credentials."
+  }
+  ```
+</details>
+
+### Roadtrip 
+  
+  GET http://localhost:3000/api/v1/roadtrip
+
+  Returns trip and weather information for registered user. Requires user api_key. 
+  Will return "Impossible route" if starting city to ending city route cannot be created.
+
+  Body parameters:
+ | param | data type | value | required/optional |
+ |---|---|---|---|
+ | origin | string | starting city formatted as Denver,CO or London,UK | REQUIRED |
+ | destination | string | ending city formatted as Denver,CO or London,UK| REQUIRED |
+ | api_key | string | valid api_key for registered user | REQUIRED |
+
+<details>
+  <summary>Example request body</summary> :
+
+  ```
+  {
+    "origin": "San Antonio, TX",
+    "destination": "Denver, CO",
+    "api_key": "XGmPkpPzXo53x2qCMVMRwqAtH"
+  }
+  ```
+</details>
+
+  Example response: 
+
+<details>
+  <summary> 200 OK Valid route</summary>
+  
+  ```
+  {
+    "data": {
+        "id": null,
+        "type": "roadtrip",
+        "attributes": {
+            "start_city": "San Antonio, TX",
+            "end_city": "Denver, CO",
+            "travel_time": "14hrs, 21mins",
+            "weather_at_eta": {
+                "temperature": 23.81,
+                "conditions": "few clouds"
+            }
+          }
+      }
+  }
+  ```
+  </details>
+<details>
+  <summary> 401 Unauthorized </summary>
+  
+  ```
+  {
+    "error": "Invalid api_key."
+  }
+  ```
+
+  </details>
+  <details>
+    <summary> 200 OK Impossible route </summary>
+    
+    ```
+    {
+    "data": {
+        "id": null,
+        "type": "roadtrip",
+        "attributes": {
+            "start_city": "New York, NY",
+            "end_city": "London, UK",
+            "travel_time": "Impossible route",
+            "weather_at_eta": null
+        }
+      }
+    }
+  ```
+  </details>
+
+  
+
+
 
 
 
