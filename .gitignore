@@ -33,6 +33,3 @@
 
 # Ignore test coverage report
 /coverage
-
-# Ignore test fixtures
-/fixtures
