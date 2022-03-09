@@ -1,11 +1,11 @@
 class CurrentWeather
-  attr_reader :dt, :sunrise, :sunset, :temp, :feels_like, :humidity, :uvi, :visibility, :conditions, :icon
+  attr_reader :datetime, :sunrise, :sunset, :temperature, :feels_like, :humidity, :uvi, :visibility, :conditions, :icon
 
   def initialize(data)
-    @dt = Time.at(data[:dt]).to_datetime
-    @sunrise = Time.at(data[:sunrise]).to_datetime
-    @sunset = Time.at(data[:sunset]).to_datetime
-    @temp = data[:temp]
+    @datetime = Time.at(data[:dt]).to_datetime.strftime("%Y-%m-%d %H:%M %z")
+    @sunrise = Time.at(data[:sunrise]).to_datetime.strftime("%Y-%m-%d %H:%M %z")
+    @sunset = Time.at(data[:sunset]).to_datetime.strftime("%Y-%m-%d %H:%M %z")
+    @temperature = data[:temp]
     @feels_like = data[:feels_like]
     @humidity = data[:humidity]
     @uvi = data[:uvi]

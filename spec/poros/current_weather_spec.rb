@@ -9,10 +9,10 @@ RSpec.describe CurrentWeather do
   end
 
   it 'has attributes' do
-    expect(current.dt).to be_instance_of(DateTime)
-    expect(current.sunrise).to be_instance_of(DateTime)
-    expect(current.sunset).to be_instance_of(DateTime)
-    expect(current.temp).to eq(59.67)
+    expect(current.datetime).to eq("2022-03-05 13:04 -0600")
+    expect(current.sunrise).to eq("2022-03-05 05:34 -0600")
+    expect(current.sunset).to eq("2022-03-05 17:04 -0600")
+    expect(current.temperature).to eq(59.67)
     expect(current.feels_like).to eq(57.63)
     expect(current.humidity).to eq(49)
     expect(current.uvi).to eq(3.36)

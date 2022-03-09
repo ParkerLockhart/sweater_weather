@@ -24,7 +24,7 @@ RSpec.describe 'Forecast Endpoint' do
       expect(forecast[:data]).to be_a(Hash)
 
       expect(forecast[:data]).to have_key(:id)
-      expect(forecast[:data][:id]).to eq('null')
+      expect(forecast[:data][:id]).to eq(nil)
 
       expect(forecast[:data]).to have_key(:type)
       expect(forecast[:data][:type]).to eq('forecast')
@@ -39,8 +39,8 @@ RSpec.describe 'Forecast Endpoint' do
 
       current = attributes[:current_weather]
 
-      expect(current).to have_key(:dt)
-      expect(current[:dt]).to be_a(String)
+      expect(current).to have_key(:datetime)
+      expect(current[:datetime]).to be_a(String)
 
       expect(current).to have_key(:sunrise)
       expect(current[:sunrise]).to be_a(String)
@@ -48,8 +48,8 @@ RSpec.describe 'Forecast Endpoint' do
       expect(current).to have_key(:sunset)
       expect(current[:sunset]).to be_a(String)
 
-      expect(current).to have_key(:temp)
-      expect(current[:temp]).to be_a(Float)
+      expect(current).to have_key(:temperature)
+      expect(current[:temperature]).to be_a(Float)
 
       expect(current).to have_key(:feels_like)
       expect(current[:feels_like]).to be_a(Float)
@@ -84,8 +84,8 @@ RSpec.describe 'Forecast Endpoint' do
       day = attributes[:daily_weather].first
 
       expect(day).to be_a(Hash)
-      expect(day).to have_key(:dt)
-      expect(day[:dt]).to be_a(String)
+      expect(day).to have_key(:date)
+      expect(day[:date]).to be_a(String)
 
       expect(day).to have_key(:sunrise)
       expect(day[:sunrise]).to be_a(String)
@@ -122,11 +122,11 @@ RSpec.describe 'Forecast Endpoint' do
       hour = attributes[:hourly_weather].first
 
       expect(hour).to be_a(Hash)
-      expect(hour).to have_key(:dt)
-      expect(hour[:dt]).to be_a(String)
+      expect(hour).to have_key(:time)
+      expect(hour[:time]).to be_a(String)
 
-      expect(hour).to have_key(:temp)
-      expect(hour[:temp]).to be_a(Float)
+      expect(hour).to have_key(:temperature)
+      expect(hour[:temperature]).to be_a(Float)
 
       expect(hour).to have_key(:conditions)
       expect(hour[:conditions]).to be_a(String)

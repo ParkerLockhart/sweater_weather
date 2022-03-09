@@ -9,9 +9,9 @@ RSpec.describe HourlyWeather do
   end
 
   it 'has attributes' do
-    expect(hourly.dt).to be_instance_of(DateTime)
-    expect(hourly.temp).to eq(59.67)
+    expect(hourly.time).to eq("13:00 -0600")
+    expect(hourly.temperature).to eq(59.67)
     expect(hourly.conditions).to eq("scattered clouds")
     expect(hourly.icon).to eq("03d")
-  end 
+  end
 end

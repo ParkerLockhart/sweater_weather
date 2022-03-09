@@ -9,9 +9,9 @@ RSpec.describe DailyWeather do
   end
 
   it 'has attributes' do
-    expect(daily.dt).to be_instance_of(DateTime)
-    expect(daily.sunrise).to be_instance_of(DateTime)
-    expect(daily.sunset).to be_instance_of(DateTime)
+    expect(daily.date).to be_instance_of(Date)
+    expect(daily.sunrise).to eq("2022-03-05 11:00 -0600")
+    expect(daily.sunset).to eq("2022-03-05 11:00 -0600")
     expect(daily.min_temp).to eq(36.36)
     expect(daily.max_temp).to eq(60.46)
     expect(daily.conditions).to eq("broken clouds")
