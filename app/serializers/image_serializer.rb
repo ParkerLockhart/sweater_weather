@@ -1,4 +1,5 @@
 class ImageSerializer
   include JSONAPI::Serializer
-  attributes :id, :location, :image_url, :credit
-end 
+  attributes :location, :image_url, :credit
+  set_id nil
+end

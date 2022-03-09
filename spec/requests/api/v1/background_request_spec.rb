@@ -21,7 +21,7 @@ RSpec.describe 'Background Endpoint' do
       expect(background[:data]).to be_a(Hash)
 
       expect(background[:data]).to have_key(:id)
-      expect(background[:data][:id]).to eq('null')
+      expect(background[:data][:id]).to eq(nil)
 
       expect(background[:data]).to have_key(:type)
       expect(background[:data][:type]).to eq('image')
