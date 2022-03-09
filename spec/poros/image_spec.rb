@@ -9,7 +9,7 @@ RSpec.describe Image do
   end
 
   it 'has attributes' do
-    expect(image.id).to eq("null")
+    expect(image.id).to eq(nil)
     expect(image.location).to eq("city, st")
     expect(image.image_url).to eq("url")
     expect(image.credit).to be_a(Hash)
@@ -18,5 +18,5 @@ RSpec.describe Image do
     expect(image.credit[:source]).to eq("https://unsplash.com")
     expect(image.credit).to have_key(:author)
     expect(image.credit[:author]).to eq("John Doe")
-  end 
+  end
 end
